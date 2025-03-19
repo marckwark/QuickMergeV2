@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quick Merge Web App</title>
+  <!-- Load PyScript assets from CDN -->
+  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
+  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+  <!-- Inline CSS for basic styling -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #007BFF;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    nav button {
+      margin: 0 5px;
+      padding: 10px 15px;
+      border: none;
+      background-color: #0056b3;
+      color: white;
+      cursor: pointer;
+    }
+    nav button:hover {
+      background-color: #003d80;
+    }
+    main {
+      padding: 20px;
+    }
+    .page-section {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Quick Merge Web App</h1>
+    <nav>
+      <button onclick="showSection('home')">Home</button>
+      <button onclick="showSection('merge')">Merge</button>
+      <button onclick="showSection('analysis')">Analysis</button>
+      <button onclick="showSection('kwaliteiten')">Kwaliteiten</button>
+    </nav>
+  </header>
+  <main>
+    <!-- Home Section -->
+    <section id="home" class="page-section">
+      <h2>Home Page</h2>
+      <div id="home-content">
+        <py-script>
+from utils.pages.home_page import display
+display()
+        </py-script>
+      </div>
+    </section>
+    <!-- Merge Section -->
+    <section id="merge" class="page-section" style="display:none;">
+      <h2>Merge Page</h2>
+      <div id="merge-content">
+        <py-script>
+from utils.pages.merge_page import display
+display()
+        </py-script>
+      </div>
+    </section>
+    <!-- Analysis Section -->
+    <section id="analysis" class="page-section" style="display:none;">
+      <h2>Analysis Page</h2>
+      <div id="analysis-content">
+        <py-script>
+from utils.pages.analysis_page import display
+display()
+        </py-script>
+      </div>
+    </section>
+    <!-- Kwaliteiten Section -->
+    <section id="kwaliteiten" class="page-section" style="display:none;">
+      <h2>Kwaliteiten Page</h2>
+      <div id="kwaliteiten-content">
+        <py-script>
+from utils.pages.kwaliteiten_page import display
+display()
+        </py-script>
+      </div>
+    </section>
+  </main>
+  <!-- Navigation control -->
+  <script>
+    function showSection(sectionId) {
+      const sections = document.getElementsByClassName('page-section');
+      for (let sec of sections) {
+        sec.style.display = 'none';
+      }
+      document.getElementById(sectionId).style.display = 'block';
+    }
+  </script>
+</body>
+</html>
