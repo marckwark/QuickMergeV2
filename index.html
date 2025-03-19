@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Quick Merge Web App</title>
+  <title>Quick Merge Application</title>
   <!-- Load PyScript assets from CDN -->
   <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
   <script defer src="https://pyscript.net/latest/pyscript.js"></script>
@@ -41,7 +41,7 @@
 </head>
 <body>
   <header>
-    <h1>Quick Merge Web App</h1>
+    <h1>Quick Merge Application</h1>
     <nav>
       <button onclick="showSection('home')">Home</button>
       <button onclick="showSection('merge')">Merge</button>
@@ -53,11 +53,12 @@
     <!-- Home Section -->
     <section id="home" class="page-section">
       <h2>Home Page</h2>
-      <div id="home-content">
-        <py-script>
-from utils.pages.home_page import display
-display()
-        </py-script>
+      <!-- In index.html -->
+      <div id="home-content"></div>
+      <py-script output="none">
+      from utils.pages.home_page_web import display
+      display()
+      </py-script>
       </div>
     </section>
     <!-- Merge Section -->
