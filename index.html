@@ -2,18 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Quick Merge Web App</title>
+  <title>Quick Merge Web App - Home Page</title>
   <!-- Load PyScript assets -->
-  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
+  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
   <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-  
-  <!-- Configure PyScript to include our module paths -->
-  <py-config>
-  {
-    "python.path": ["./utils", "./utils/pages"]
-  }
-  </py-config>
-  
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -21,32 +13,111 @@
       margin: 0;
       padding: 20px;
     }
+    .container {
+      background: white;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
     h1 {
       text-align: center;
       color: #327bc3;
     }
-    .page-section {
-      background: white;
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 800px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    h2 {
+      color: #327bc3;
+      margin-left: 30px;
+    }
+    .button {
+      background-color: #134B70;
+      color: #EEEEEE;
+      border: none;
+      border-radius: 15px;
+      padding: 10px 20px;
+      margin: 10px 30px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .button:hover {
+      background-color: #508C9B;
+    }
+    .textbox {
+      display: block;
+      width: calc(100% - 60px);
+      margin: 10px 30px;
+      padding: 10px;
+      font-size: 15px;
+      color: #201E43;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: none;
+    }
+    .textbox[disabled] {
+      background-color: #f0f0f0;
+    }
+    .section {
+      margin-bottom: 30px;
     }
   </style>
 </head>
 <body>
-  <h1>Quick Merge Web App</h1>
-  <main>
-    <!-- Home Section -->
-    <section id="home" class="page-section">
-      <h2>Home Page</h2>
-      <div id="home-content"></div>
-      <py-script output="none">
-from home_page_web import display
-display()
-      </py-script>
-    </section>
-  </main>
+  <div class="container">
+    <h1>Quick Merge Web App</h1>
+    <h2>Toelichting op de tool</h2>
+    <div id="home-content">
+      <!-- Analysis Section -->
+      <div class="section">
+        <button id="analysis-btn" class="button">Analysecertificaten</button>
+        <textarea class="textbox" disabled style="height:100px;">
+Hiermee kun je kiezen welke analysecertificaten van de Y-schijf 
+(of een andere map) naar de projectmap moeten worden gekopieerd. 
+Bovendien worden al deze analysecertificaten ook samengevoegd 
+in progressieve volgorde.
+        </textarea>
+      </div>
+      <!-- Merge Section -->
+      <div class="section">
+        <button id="merge-btn" class="button">PDF's mergen</button>
+        <textarea class="textbox" disabled style="height:100px;">
+Hiermee kun je kiezen welke PDF's bestanden samengevoegd moeten worden 
+tot één bestand. Dit is handig om bijlagen voor de rapportage te maken.
+        </textarea>
+      </div>
+      <!-- Kwaliteiten Section -->
+      <div class="section">
+        <button id="kwaliteiten-btn" class="button">Kwaliteiten CSV bestand</button>
+        <textarea class="textbox" disabled style="height:100px;">
+Hiermee kun je de SOR en PFAS toetsingen samenvoegen tot 
+één CSV-bestand. Dit kun je in ArcGIS inladen voor een kwaliteiten shape.
+        </textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- PyScript block for attaching event handlers -->
+  <py-script output="none">
+def analysis_callback(event):
+    from js import console, document
+    console.log("Analysis callback triggered")
+    # Example: update the page content
+    document.getElementById("home-content").innerHTML += "<p style='color:#327bc3; margin-left:30px;'>Analysecertificaten callback triggered!</p>"
+
+def merge_callback(event):
+    from js import console, document
+    console.log("Merge callback triggered")
+    document.getElementById("home-content").innerHTML += "<p style='color:#327bc3; margin-left:30px;'>PDF's mergen callback triggered!</p>"
+
+def kwaliteiten_callback(event):
+    from js import console, document
+    console.log("Kwaliteiten callback triggered")
+    document.getElementById("home-content").innerHTML += "<p style='color:#327bc3; margin-left:30px;'>Kwaliteiten CSV callback triggered!</p>"
+
+from js import document
+document.getElementById("analysis-btn").addEventListener("click", analysis_callback)
+document.getElementById("merge-btn").addEventListener("click", merge_callback)
+document.getElementById("kwaliteiten-btn").addEventListener("click", kwaliteiten_callback)
+  </py-script>
 </body>
 </html>
